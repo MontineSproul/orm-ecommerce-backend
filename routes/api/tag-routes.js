@@ -30,7 +30,7 @@ include: [{
 })
 .then((dataDb) => {
   if (!dataDb) {
-    res.status(404).json({ message: "tag has no user data" });
+    res.status(404).json({ message: 'no user data' });
     return;
   }
   res.json(dataDb);
@@ -64,7 +64,7 @@ router.put('/:id', (req, res) => {
 )
 .then((dataDb) => {
   if (!dataDb) {
-    res.status(404).json({ message: "tag has no user data" });
+    res.status(404).json({ message: 'no user data' });
     return;
   }
   res.json(dataDb);
@@ -85,7 +85,7 @@ router.delete('/:id', (req, res) => {
 
   .then((dataDb) => {
     if (!dataDb) {
-      res.status(404).json({ message: "tag has no user data" });
+      res.status(404).json({ message: 'no user data'});
       return;
     }
     res.json(dataDb);
