@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
-
+// api/categories
 router.get('/', (req, res) => {
   Category.findAll ({
     include: [
@@ -27,19 +27,20 @@ router.get('/:id', (req, res) => {
       {
         model: Product,
         attributes: ["product_name"],
-      }
+      },
     ],
   })
-    .then(dataDb => {
-      if(!dataDb){
-        res.status(404).json({ message: "User not found"})
-        return;
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+  .then((dataDb) => {
+    if (!dataDb) {
+      res.status(404).json({ message: "No user found with this id" });
+      return;
+    }
+    res.json(dataDb);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 router.post('/', (req, res) => {
@@ -53,8 +54,8 @@ router.post('/', (req, res) => {
   });
 });
 
-router.put('/:id', async (req, res) => {
-  await Category.update(req.body, {
+router.put('/:id', (req, res) => {
+   Category.update(req.body, {
     where: {
       id: req.params.id,
     },
